@@ -1,0 +1,115 @@
+.search_vin_wrapper{
+	background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 1px rgba(0,0,0,.4);
+}
+.search_by_wrapper{
+	display: flex;
+	margin-bottom: 16px;
+}
+.search_by_wrapper button{
+	font-size: 14px !important;
+  font-weight: 700 !important;
+	background: #EEEEEE !important;
+  color: #333333 !important;
+  border: none;
+	position: relative;
+}
+.search_by_vin{
+	border-radius: 10px 0 0 10px;
+}
+.search_by_plate{
+	border-radius: 0 10px 10px 0px;
+}
+.select-state{
+	color: #8D8D8D !important;
+}
+.select-state option{
+	color: #495057;
+}
+.select-state.option-selected{
+	color: inherit !important;
+}
+button.search_by_toggle_active{
+	color: white !important;
+  background: #333333 !important;
+}
+.search_by-toogle:before {
+	opacity:0;
+    background-color: #EEEEEE;
+    bottom: -3px;
+    content: "";
+    height: 14px;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%) rotate(45deg);
+    width: 14px;
+	transition: opacity 0s, background-color 0.3s;
+}
+.search_by-toogle.search_by_toggle_active:before {
+	opacity: 1;
+    background-color: #333333;
+}
+.input_container{
+	position: relative;
+	display: none;
+}
+.input_container_plate input , .input_container_plate  select{
+	width: 49% !important;
+	display: inline;
+}
+.input_container_active{
+	display: inherit !important;
+}
+.form-control{
+	font-size: 1rem;
+    font-weight: 400;
+	line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+	text-transform: uppercase;
+	box-sizing: border-box;
+	height: calc(1.9em + 0.75rem + 2px);
+    border: 1px solid #f0f0f0!important;
+	border-radius: 0.25rem;
+	transition: border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out;
+	margin-bottom: 1rem!important;
+}
+.indicator{
+	position: absolute;
+    right: 14px;
+    top: 10px;
+}
+.form-collection{
+	background-color: #157796!important;
+  border-color: #157796!important;
+	color: #fff !important;
+	padding: 10px 30px !important;
+	width: 100%!important;
+  border-radius: 5px!important;
+	font-weight: 400 !important;
+	text-align: center !important;
+  vertical-align: middle !important;
+	font-size: 1rem !important;
+  line-height: 1.5 !important;
+	transition: color 0.15s ease-in-out,background-color 0.15s ease-in-out,border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out !important; 
+}
+.errorText_form{
+	color: red;
+	margin-top: -10px;
+    margin-bottom: 10px;
+}
+@media (max-width:424px) {
+	.input_container_plate input , .input_container_plate  select{
+		width: 100%;
+	}
+}
+@media (max-width:767px) {
+	.search_by_wrapper{
+		justify-content: center;
+	}
+	.search_vin_wrapper{
+		margin: 0px -10px 0 -10px;
+	}
+}

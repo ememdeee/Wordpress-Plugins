@@ -54,7 +54,7 @@ function homeCollection_plate() {
 	var stateInput = document.getElementById('state-list'); var stateInputValue = document.getElementById('state-list').value;
 	var errorText = document.getElementById('errorText_plate'); errorText.textContent = '';
     if (plateInputValue != "" & stateInputValue != ""){
-        console.log("yeay!");
+        // console.log("yeay!");
         submitButton.textContent = 'Please Wait...';
         disable (submitButton, plateInput, stateInput);
         var requestData = {
@@ -93,7 +93,7 @@ function homeCollection_plate() {
     else{
         errorText.textContent = 'Please enter all fields before submitting.';
     }
-    console.log("Hai!");
+    console.log("Please Wait...");
 };
 
 function windowSticker() {
@@ -109,6 +109,10 @@ function windowSticker() {
 	} else {
 		errorText.textContent = 'Please enter a VIN of 17 characters.';
 	}
+};
+
+function windowSticker_plate() {
+    window.location.href = 'https://www.google.com';
 };
 
 // for search by vin or plate toogle
@@ -133,15 +137,18 @@ function handleToggleClick(buttonSelector, containerSelector, buttonFunction) {
     // Add 'input_container_active' class to associated container
     document.querySelector(containerSelector).classList.add('input_container_active');
 
-    document.querySelector('#vinForm button').onclick = buttonFunction;
+    const button = document.querySelector('#vinForm button');
+    button.removeAttribute('onclick');
+    button.onclick = window[buttonFunction];
 };
 
-function searchByVinClicked() {
-    handleToggleClick('.search_by_vin', '.input_container_vin', homeCollection);
+function searchByVinClicked(functionName) {
+    handleToggleClick('.search_by_vin', '.input_container_vin', functionName);
 };
 
-function searchByPlateClicked() {
-    handleToggleClick('.search_by_plate', '.input_container_plate', homeCollection_plate);
+function searchByPlateClicked(functionName) {
+    var modifiedFunctionName = functionName + '_plate';
+    handleToggleClick('.search_by_plate', '.input_container_plate', modifiedFunctionName);
 };
 
 // select state color change

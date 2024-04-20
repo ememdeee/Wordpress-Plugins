@@ -146,12 +146,7 @@ function handleToggleClick(buttonSelector, containerSelector, buttonFunction) {
 
     const button = document.querySelector('#vinForm button');
     button.removeAttribute('onclick');
-    // try
     button.setAttribute("onclick", "formCollection('" + buttonFunction + "')");
-    // button.onclick = new Function('formCollection("' + buttonFunction + '")');
-    // console.log("now: ", 'formCollection("' + buttonFunction + '")')
-    // console.log("need to be: ")
-    console.log("formCollection(", buttonFunction,")");
 };
 
 function searchByVinClicked(reportType) {

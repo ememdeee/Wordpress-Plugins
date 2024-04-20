@@ -1,12 +1,40 @@
+// fetch license_plate to vin function 
+function fetchVinData(stateInputValue, plateInputValue) {
+    return new Promise(function(resolve, reject) {
+        var requestData = {
+            state: stateInputValue,
+            plate: plateInputValue,
+            email: 'test@test.com'
+        };
+
+        var apiUrl = 'https://app.detailedvehiclehistory.com/landing/get_license';
+
+        jQuery.ajax({
+            type: 'POST',
+            url: apiUrl,
+            data: requestData,
+            success: function(response) {
+                var { vin } = JSON.parse(response);
+                resolve(vin);
+            },
+            error: function(xhr, status, error) {
+                reject(error);
+            }
+        });
+    });
+}
+
+// end of licenseplate fetching function
+
 // Function to disable input fields
 function disable() {
     for (var i = 0; i < arguments.length; i++) {
-      var element = arguments[i];
-      if (element && typeof element === 'object') {
+        var element = arguments[i];
+        if (element && typeof element === 'object') {
         element.setAttribute('disabled', true);
-      }
+        }
     }
-  }
+}
   
 // Function to enable input fields
 function undisable() {
@@ -31,88 +59,67 @@ function toUpperCase() {
 	inputElement.value = inputElement.value.toUpperCase();
 };
 
-function homeCollection() {
-	var submitButton = document.querySelector('#vinForm button'); var originalText = submitButton.textContent;
+function redirect(vin, type){
+    if (type=="vhr" || type=="vhr_plate"){
+        setTimeout(function () {
+            window.location.href = 'https://www.clearvin.com/en/payment/prepare/' + vin + '/?a_aid=b3a49a62';
+        }, 1000); // You can adjust the delay time (in milliseconds) as needed
+    }
+    else if (type=="ws" || type=="ws_plate"){
+        setTimeout(function () {
+            window.location.href = 'https://www.clearvin.com/en/window-sticker/checkout/' + vin + '/?a_aid=b3a49a62';
+        }, 1000); // You can adjust the delay time (in milliseconds) as needed
+    }
+}
+
+function formCollection(type) {
+    console.log("formCollection...")
+    // get vin data
 	var vinInput = document.getElementById('vinInput'); var vinInputValue = document.getElementById('vinInput').value;
 	var errorText = document.getElementById('errorText'); errorText.textContent = '';
-
-	if (vinInputValue.length === 17) {
-		submitButton.textContent = 'Please Wait...';
-        disable (submitButton, vinInput);
-		setTimeout(function () {
-			window.location.href = 'https://www.clearvin.com/en/payment/prepare/' + vinInputValue + '/?a_aid=b3a49a62';
-		}, 1000); // You can adjust the delay time (in milliseconds) as needed
+    // plate data
+    var plateInput = document.getElementById('plateInput'); var plateInputValue = document.getElementById('plateInput').value;
+	var stateInput = document.getElementById('state-list'); var stateInputValue = document.getElementById('state-list').value;
+	var errorText_plate = document.getElementById('errorText_plate'); errorText_plate.textContent = '';
+	var submitButton = document.querySelector('#vinForm button'); var originalText = submitButton.textContent;
+    
+    // fetch LP
+    if (type=="vhr_plate" || type=="ws_plate"){ // the input is plate
+        vinInputValue=""; //clear vin data
+        submitButton.textContent = 'Please Wait...';
+        disable (submitButton, vinInput, plateInput, stateInput);
+        if (plateInputValue !== '' && stateInputValue !== '') {
+            console.log("Fetching Plate to VIN...")
+            errorText_plate.textContent = '';
+            fetchVinData(stateInputValue, plateInputValue).then(function(vin) {
+                if (vin){
+                    console.log("success!")
+                    console.log('VIN:', vin);
+                    // do vin check if necesarry here with other function
+                    redirect(vin, type);
+                }else{
+                    undisable (submitButton, vinInput, plateInput, stateInput);
+                    submitButton.textContent = originalText;
+                    errorText_plate.textContent = "Sorry, we couldn't find your record, Please check the License Plate and try again.";
+                }
+            })
+        }     
+        else {
+            errorText_plate.textContent = 'Please enter all fields before submitting.';
+            submitButton.textContent = originalText;
+            undisable (submitButton, vinInput, plateInput, stateInput);
+        };
+    }
+	else if (vinInputValue.length === 17) { //vin
+        submitButton.textContent = 'Please Wait...';
+        errorText.textContent = '';
+        disable (submitButton, vinInput, plateInput, stateInput);
+        redirect(vinInputValue, type);
 	} else {
 		errorText.textContent = 'Please enter a VIN of 17 characters.';
         submitButton.textContent = originalText;
-        undisable (submitButton, vinInput);
+        undisable (submitButton, vinInput, plateInput, stateInput);
 	}
-};
-function homeCollection_plate() {
-    var submitButton = document.querySelector('#vinForm button'); var originalText = submitButton.textContent;
-	var plateInput = document.getElementById('plateInput'); var plateInputValue = document.getElementById('plateInput').value;
-	var stateInput = document.getElementById('state-list'); var stateInputValue = document.getElementById('state-list').value;
-	var errorText = document.getElementById('errorText_plate'); errorText.textContent = '';
-    if (plateInputValue != "" & stateInputValue != ""){
-        // console.log("yeay!");
-        submitButton.textContent = 'Please Wait...';
-        disable (submitButton, plateInput, stateInput);
-        var requestData = {
-            state: stateInputValue,
-            plate: plateInputValue,
-            email: 'test@test.com'
-          };
-        
-        var apiUrl = 'https://app.detailedvehiclehistory.com/landing/get_license';
-        
-        jQuery.ajax({
-            type: 'POST',
-            url: apiUrl,
-            data: requestData,
-            success: function (response) {
-                var { vin } = JSON.parse(response);
-                if (vin){
-                    setTimeout(function () {
-                        window.location.href = 'https://www.clearvin.com/en/payment/prepare/' + vin + '/?a_aid=b3a49a62';
-                    }, 1000); // You can adjust the delay time (in milliseconds) as needed
-                }else{
-                    errorText.textContent = "Sorry, we couldn't find your record, Please check the License Plate and try again.";
-                    submitButton.textContent = originalText;
-                    undisable (submitButton, plateInput, stateInput);
-                }
-            },
-            error: function (error) {
-              // Logging any errors to the console
-              console.error('Error API:', error);
-              errorText.textContent = 'Oops! Something went wrong on our end.';
-              submitButton.textContent = originalText;
-              undisable (submitButton, plateInput, stateInput);
-            }
-          });
-    }
-    else{
-        errorText.textContent = 'Please enter all fields before submitting.';
-    }
-    console.log("Please Wait...");
-};
-
-function windowSticker() {
-	var submitButton = document.querySelector('button');
-	var vinInputValue = document.getElementById('vinInput').value;
-	var errorText = document.getElementById('errorText');
-
-	if (vinInputValue.length === 17) {
-		submitButton.textContent = 'Please Wait';
-		setTimeout(function () {
-			window.location.href = 'https://www.clearvin.com/en/window-sticker/checkout/' + vinInputValue + '/?a_aid=b3a49a62';
-		}, 1000); // You can adjust the delay time (in milliseconds) as needed
-	} else {
-		errorText.textContent = 'Please enter a VIN of 17 characters.';
-	}
-};
-
-function windowSticker_plate() {
-    window.location.href = 'https://www.google.com';
 };
 
 // for search by vin or plate toogle
@@ -139,16 +146,21 @@ function handleToggleClick(buttonSelector, containerSelector, buttonFunction) {
 
     const button = document.querySelector('#vinForm button');
     button.removeAttribute('onclick');
-    button.onclick = window[buttonFunction];
+    // try
+    button.setAttribute("onclick", "formCollection('" + buttonFunction + "')");
+    // button.onclick = new Function('formCollection("' + buttonFunction + '")');
+    // console.log("now: ", 'formCollection("' + buttonFunction + '")')
+    // console.log("need to be: ")
+    console.log("formCollection(", buttonFunction,")");
 };
 
-function searchByVinClicked(functionName) {
-    handleToggleClick('.search_by_vin', '.input_container_vin', functionName);
+function searchByVinClicked(reportType) {
+    handleToggleClick('.search_by_vin', '.input_container_vin', reportType);
 };
 
-function searchByPlateClicked(functionName) {
-    var modifiedFunctionName = functionName + '_plate';
-    handleToggleClick('.search_by_plate', '.input_container_plate', modifiedFunctionName);
+function searchByPlateClicked(reportType) {
+    var modifiedReportType = reportType + '_plate';
+    handleToggleClick('.search_by_plate', '.input_container_plate', modifiedReportType);
 };
 
 // select state color change

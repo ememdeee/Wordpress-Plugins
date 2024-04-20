@@ -8,15 +8,15 @@ class avlShortcodes {
 
     }
 
-    public function form($functionName){
+    public function form($reportType){
         $return_html = '';
         ob_start();
         ?>
         <section>
             <div class="search_vin_wrapper">
                 <div class="search_by_wrapper">
-                    <button class="search_by-toogle search_by_vin search_by_toggle_active" onclick="searchByVinClicked('<?php echo $functionName; ?>')" role="tab">by VIN</button>
-                    <button class="search_by-toogle search_by_plate" onclick="searchByPlateClicked('<?php echo $functionName; ?>')" role="tab">by US License Plate</button>
+                    <button class="search_by-toogle search_by_vin search_by_toggle_active" onclick="searchByVinClicked('<?php echo $reportType; ?>')" role="tab">by VIN</button>
+                    <button class="search_by-toogle search_by_plate" onclick="searchByPlateClicked('<?php echo $reportType; ?>')" role="tab">by US License Plate</button>
                 </div>
                 <form id="vinForm">
                     <div class="input_container input_container_vin input_container_active">
@@ -82,7 +82,7 @@ class avlShortcodes {
                         </select>
                         <div class="errorText_form" id="errorText_plate"></div>
                     </div>
-                    <button type="button" class="form-collection" onclick="<?php echo $functionName; ?>()">Check VIN</button>
+                    <button type="button" class="form-collection" onclick="formCollection('<?php echo $reportType; ?>')">Check VIN</button>
                 </form>
             </div>
         </section>
@@ -112,7 +112,7 @@ class avlShortcodes {
  */
 function getVinForm(){
     $initOCRObj = new avlShortcodes;
-    return $initOCRObj->form('homeCollection');
+    return $initOCRObj->form('vhr');
 }
 add_shortcode('vin_form', 'getVinForm');
 
@@ -121,6 +121,6 @@ add_shortcode('vin_form', 'getVinForm');
  */
 function getWsForm(){
     $initOCRObj = new avlShortcodes;
-    return $initOCRObj->form('windowSticker');
+    return $initOCRObj->form('ws');
 }
 add_shortcode('ws_form', 'getWsForm');

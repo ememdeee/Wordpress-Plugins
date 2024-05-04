@@ -14,7 +14,7 @@ class avlShortcodes {
         ?>
         <section>
             <div class="search_vin_wrapper">
-                <div class="search_by_wrapper">
+                <div class="search_by_wrapper" role="tablist">
                     <button class="search_by-toogle search_by_vin search_by_toggle_active" onclick="searchByVinClicked('<?php echo $reportType; ?>')" role="tab">by VIN</button>
                     <button class="search_by-toogle search_by_plate" onclick="searchByPlateClicked('<?php echo $reportType; ?>')" role="tab">by US License Plate</button>
                 </div>

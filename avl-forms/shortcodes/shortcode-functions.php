@@ -20,13 +20,13 @@ class avlShortcodes {
                 </div>
                 <form id="vinForm">
                     <div class="input_container input_container_vin input_container_active">
-                        <input type="text" class="form-control" id="vinInput" placeholder="ENTER VIN" maxlength="17" oninput="updateIndicator(); toUpperCase()">
+                        <input type="text" class="form-control vin_input" id="vinInput" placeholder="ENTER VIN" maxlength="17" oninput="updateIndicator(); toUpperCase(); syncValues(this, 'vin_input');">
                         <span class="indicator" id="indicator">0 of 17</span>
                         <div class="errorText_form" id="errorText"></div>
                     </div>
                     <div class="input_container input_container_plate">
-                        <input type="text" class="form-control plateInput" id="plateInput" placeholder="ENTER PLATE" maxlength="10" oninput="updateIndicator(); toUpperCase()">
-                        <select class="select-state form-control" id="state-list" required="" onchange="updateColor()">
+                        <input type="text" class="form-control plate_input" id="plateInput" placeholder="ENTER PLATE" maxlength="10" oninput="updateIndicator(); toUpperCase(); syncValues(this, 'plate_input');">
+                        <select class="select_state form-control" id="state-list" required="" onchange="updateColor(); syncValues(this, 'select_state');">
                             <option selected="" disabled="" value="">Select State</option>
                             <option value="AL">AL - Alabama</option>
                             <option value="AK">AK - Alaska</option>
@@ -82,22 +82,9 @@ class avlShortcodes {
                         </select>
                         <div class="errorText_form" id="errorText_plate"></div>
                     </div>
-                    <button type="button" class="form-collection" onclick="formCollection('<?php echo $reportType; ?>')">Check VIN</button>
+                    <button type="button" class="form-collection main-form-btn" onclick="formCollection('<?php echo $reportType; ?>')">Check VIN</button>
                 </form>
             </div>
-        </section>
-        <?php
-        $return_html = ob_get_contents();
-        ob_end_clean();
-
-        return $return_html;
-    }
-    public function ws_form(){
-        $return_html = '';
-        ob_start();
-        ?>
-        <section>
-            <p>Not Yet</p>
         </section>
         <?php
         $return_html = ob_get_contents();

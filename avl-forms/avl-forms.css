@@ -22,13 +22,13 @@
 .search_by_plate{
 	border-radius: 0 10px 10px 0px;
 }
-.select-state{
+.select_state{
 	color: #8D8D8D !important;
 }
-.select-state option{
+.select_state option{
 	color: #495057;
 }
-.select-state.option-selected{
+.select_state.option-selected{
 	color: inherit !important;
 }
 button.search_by_toggle_active{

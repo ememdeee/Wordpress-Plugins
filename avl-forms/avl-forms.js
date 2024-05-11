@@ -59,6 +59,18 @@ function toUpperCase() {
 	inputElement.value = inputElement.value.toUpperCase();
 };
 
+function syncValues(input, className) {
+    // Get the value of the input that triggered the event
+    var value = input.value;
+
+    // Select all input fields with the class "vin_input" except for the input that triggered the event
+    document.querySelectorAll('.' + className).forEach( field => {
+        if (field !==input){
+            field.value = value;
+        };
+    });
+}
+
 function redirect(vin, type){
     if (type=="vhr" || type=="vhr_plate"){
         setTimeout(function () {
@@ -139,14 +151,20 @@ function handleToggleClick(buttonSelector, containerSelector, buttonFunction) {
     removeTogglingClass();
 
     // Add 'search_by_toggle_active' class to clicked button
-    document.querySelector(buttonSelector).classList.add('search_by_toggle_active');
+    document.querySelectorAll(buttonSelector).forEach(button => {
+        button.classList.add('search_by_toggle_active');
+    });
 
     // Add 'input_container_active' class to associated container
-    document.querySelector(containerSelector).classList.add('input_container_active');
+    document.querySelectorAll(containerSelector).forEach(container =>{
+        container.classList.add('input_container_active');
+    });
 
-    const button = document.querySelector('#vinForm button');
-    button.removeAttribute('onclick');
-    button.setAttribute("onclick", "formCollection('" + buttonFunction + "')");
+    // Change OnClick function
+    document.querySelectorAll(".main-form-btn").forEach(button => {
+        button.removeAttribute('onclick');
+        button.setAttribute("onclick", "formCollection('" + buttonFunction + "')");
+    });
 };
 
 function searchByVinClicked(reportType) {

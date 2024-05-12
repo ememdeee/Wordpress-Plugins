@@ -20,12 +20,12 @@ class avlShortcodes {
                 </div>
                 <form id="vinForm">
                     <div class="input_container input_container_vin input_container_active">
-                        <input type="text" class="form-control vin_input" id="vinInput" placeholder="ENTER VIN" maxlength="17" oninput="updateIndicator(); toUpperCase(); syncValues(this, 'vin_input');">
+                        <input type="text" class="form-control vin_input" id="vinInput" placeholder="ENTER VIN" maxlength="17" oninput="toUpperCase(); syncValues(this, 'vin_input'); updateIndicator();">
                         <span class="indicator" id="indicator">0 of 17</span>
-                        <div class="errorText_form" id="errorText"></div>
+                        <div class="errorText_form errorText_vin" id="errorText_vin"></div>
                     </div>
                     <div class="input_container input_container_plate">
-                        <input type="text" class="form-control plate_input" id="plateInput" placeholder="ENTER PLATE" maxlength="10" oninput="updateIndicator(); toUpperCase(); syncValues(this, 'plate_input');">
+                        <input type="text" class="form-control plate_input" id="plateInput" placeholder="ENTER PLATE" maxlength="10" oninput="toUpperCase(); syncValues(this, 'plate_input');">
                         <select class="select_state form-control" id="state-list" required="" onchange="updateColor(); syncValues(this, 'select_state');">
                             <option selected="" disabled="" value="">Select State</option>
                             <option value="AL">AL - Alabama</option>
@@ -80,7 +80,7 @@ class avlShortcodes {
                             <option value="WI">WI - Wisconsin</option>
                             <option value="WY">WY - Wyoming</option>
                         </select>
-                        <div class="errorText_form" id="errorText_plate"></div>
+                        <div class="errorText_form errorText_plate" id="errorText_plate"></div>
                     </div>
                     <button type="button" class="form-collection main-form-btn" onclick="formCollection('<?php echo $reportType; ?>')">Check VIN</button>
                 </form>

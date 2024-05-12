@@ -29,29 +29,32 @@ function fetchVinData(stateInputValue, plateInputValue) {
 // Function to disable input fields
 function disable() {
     for (var i = 0; i < arguments.length; i++) {
-        var element = arguments[i];
-        if (element && typeof element === 'object') {
-        element.setAttribute('disabled', true);
-        }
+        var elementClass = arguments[i];
+        document.querySelectorAll(elementClass).forEach(element =>{
+            element.setAttribute('disabled', true);
+        })
+        
     }
 }
-  
+
 // Function to enable input fields
 function undisable() {
     for (var i = 0; i < arguments.length; i++) {
-        var element = arguments[i];
-        if (element && typeof element === 'object') {
-        element.removeAttribute('disabled');
-        }
+        var elementClass = arguments[i];
+        document.querySelectorAll(elementClass).forEach(element =>{
+            element.removeAttribute('disabled');
+        })
+        
     }
 }
 
 function updateIndicator() {
 	var inputElement = document.getElementById('vinInput');
-	var indicatorElement = document.getElementById('indicator');
-
 	var currentLength = inputElement.value.length;
-	indicatorElement.textContent = currentLength + ' of 17';
+
+    document.querySelectorAll('.indicator').forEach(indicator => {
+        indicator.textContent = currentLength + ' of 17';
+    });
 };
 
 function toUpperCase() {
@@ -83,26 +86,41 @@ function redirect(vin, type){
         }, 1000); // You can adjust the delay time (in milliseconds) as needed
     }
 }
+function clearErrorText(){
+    document.querySelectorAll(".errorText_vin").forEach(errorText => {
+        errorText.textContent = '';
+    });
+    document.querySelectorAll(".errorText_plate").forEach(errorText => {
+        errorText.textContent = '';
+    });
+}
+function addErrorText(elementClass, text){
+    document.querySelectorAll(elementClass).forEach(errorText =>{
+        errorText.textContent = text;
+    });
+}
+function updateBtnText(text){
+    document.querySelectorAll('#vinForm button').forEach(btnText => {
+        btnText.textContent = text;
+    })
+}
 
 function formCollection(type) {
     console.log("formCollection...")
-    // get vin data
-	var vinInput = document.getElementById('vinInput'); var vinInputValue = document.getElementById('vinInput').value;
-	var errorText = document.getElementById('errorText'); errorText.textContent = '';
-    // plate data
-    var plateInput = document.getElementById('plateInput'); var plateInputValue = document.getElementById('plateInput').value;
-	var stateInput = document.getElementById('state-list'); var stateInputValue = document.getElementById('state-list').value;
-	var errorText_plate = document.getElementById('errorText_plate'); errorText_plate.textContent = '';
-	var submitButton = document.querySelector('#vinForm button'); var originalText = submitButton.textContent;
+    clearErrorText();
+	var vinInputValue = document.getElementById('vinInput').value;
+    var plateInputValue = document.getElementById('plateInput').value;
+	var stateInputValue = document.getElementById('state-list').value;
+    var btnOriginalText = document.querySelector('#vinForm button').textContent;
     
     // fetch LP
     if (type=="vhr_plate" || type=="ws_plate"){ // the input is plate
         vinInputValue=""; //clear vin data
-        submitButton.textContent = 'Please Wait...';
-        disable (submitButton, vinInput, plateInput, stateInput);
+        updateBtnText('Please Wait...')
+        disable ('#vinForm button', '.vin_input', '.plate_input', '.select_state');
         if (plateInputValue !== '' && stateInputValue !== '') {
             console.log("Fetching Plate to VIN...")
-            errorText_plate.textContent = '';
+            clearErrorText();
             fetchVinData(stateInputValue, plateInputValue).then(function(vin) {
                 if (vin){
                     console.log("success!")
@@ -110,27 +128,28 @@ function formCollection(type) {
                     // do vin check if necesarry here with other function
                     redirect(vin, type);
                 }else{
-                    undisable (submitButton, vinInput, plateInput, stateInput);
-                    submitButton.textContent = originalText;
-                    errorText_plate.textContent = "Sorry, we couldn't find your record, Please check the License Plate and try again.";
+                    undisable ('#vinForm button', '.vin_input', '.plate_input', '.select_state');
+                    updateBtnText(btnOriginalText)
+                    addErrorText(".errorText_plate", "Sorry, we couldn't find your record, Please check the License Plate and try again.");
                 }
             })
         }     
         else {
-            errorText_plate.textContent = 'Please enter all fields before submitting.';
-            submitButton.textContent = originalText;
-            undisable (submitButton, vinInput, plateInput, stateInput);
+            addErrorText(".errorText_plate", "Please enter all fields before submitting.");
+            updateBtnText(btnOriginalText)
+            undisable ('#vinForm button', '.vin_input', '.plate_input', '.select_state');
         };
     }
 	else if (vinInputValue.length === 17) { //vin
-        submitButton.textContent = 'Please Wait...';
-        errorText.textContent = '';
-        disable (submitButton, vinInput, plateInput, stateInput);
+        updateBtnText('Please Wait...')
+        clearErrorText();
+        disable ('#vinForm button', '.vin_input', '.plate_input', '.select_state');
         redirect(vinInputValue, type);
 	} else {
-		errorText.textContent = 'Please enter a VIN of 17 characters.';
-        submitButton.textContent = originalText;
-        undisable (submitButton, vinInput, plateInput, stateInput);
+        addErrorText(".errorText_vin", "Please enter a VIN of 17 characters.");
+        console.log("Error errorText_vin");
+        updateBtnText(btnOriginalText)
+        undisable ('#vinForm button', '.vin_input', '.plate_input', '.select_state');
 	}
 };
 
@@ -178,9 +197,9 @@ function searchByPlateClicked(reportType) {
 
 // select state color change
 function updateColor() {
-	var selectElement = document.getElementById("state-list");
-	var isSelected = selectElement.options[selectElement.selectedIndex].value !== "";
-	selectElement.classList.add("option-selected");
+    document.querySelectorAll('.select_state').forEach(element => {
+        element.classList.add("option-selected");
+    });
 }
 
 console.log("AVL forms js work!")

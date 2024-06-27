@@ -23,7 +23,7 @@
 	border-radius: 0 10px 10px 0px;
 }
 .select_state{
-	color: #8D8D8D !important;
+	color: rgb(73, 80, 87) !important;
 }
 .select_state option{
 	color: #495057;
@@ -99,6 +99,16 @@ button.search_by_toggle_active{
 	color: red;
 	margin-top: -10px;
     margin-bottom: 10px;
+}
+.visually-hidden{
+	position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
 @media (max-width:424px) {
 	.input_container_plate input , .input_container_plate  select{

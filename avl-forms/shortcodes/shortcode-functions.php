@@ -26,6 +26,7 @@ class avlShortcodes {
                     </div>
                     <div class="input_container input_container_plate">
                         <input type="text" class="form-control plate_input" id="plateInput" placeholder="ENTER PLATE" maxlength="10" oninput="toUpperCase(); syncValues(this, 'plate_input');">
+                        <label for="state-list" class="visually-hidden">Select a State:</label>
                         <select class="select_state form-control" id="state-list" required="" onchange="updateColor(); syncValues(this, 'select_state');">
                             <option selected="" disabled="" value="">Select State</option>
                             <option value="AL">AL - Alabama</option>

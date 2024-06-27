@@ -3,6 +3,7 @@
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 0 1px rgba(0,0,0,.4);
+	margin: 0;
 }
 .search_by_wrapper{
 	display: flex;
@@ -118,8 +119,5 @@ button.search_by_toggle_active{
 @media (max-width:767px) {
 	.search_by_wrapper{
 		justify-content: center;
-	}
-	.search_vin_wrapper{
-		margin: 0px -10px 0 -10px;
 	}
 }

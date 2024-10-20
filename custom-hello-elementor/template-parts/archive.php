@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php if (!is_front_page()) { custom_breadcrumbs(); } ?>
 
 	<header class="page-header">
-		<h1 class="entry-title">Blogs</h1>
+		<h1 class="entry-title">Blog</h1>
 	</header>
 
 	<div class="content-container">

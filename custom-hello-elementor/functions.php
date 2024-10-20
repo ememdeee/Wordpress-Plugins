@@ -348,7 +348,6 @@ function prevent_role_change($all_roles) {
 add_filter('editable_roles', 'prevent_role_change');
 
 
-// custom breadcrumbs
 function custom_breadcrumbs() {
     global $post;
 
@@ -360,7 +359,12 @@ function custom_breadcrumbs() {
         
         // Check if it's the main blog page
         if (is_home()) {
-            echo ' &raquo; Blogs'; // Display "Blog" for the main posts page
+            echo ' &raquo; Blog'; // Display "Blog" for the main posts page
+        } 
+        // Check if it's a single post page
+        elseif (is_single()) {
+            echo ' &raquo; <a href="' . home_url('/blog/') . '">Blog</a>'; // Link to the blog page
+            echo ' &raquo; ' . ucwords(strtolower(get_the_title())); // Display current post title
         } 
         // Check if it's an archive page
         elseif (is_archive()) {
@@ -393,11 +397,6 @@ function custom_breadcrumbs() {
             foreach ($breadcrumbs as $crumb) {
                 echo ' &raquo; ' . $crumb;
             }
-        }
-
-        // Display the current page title only if not on blog archive
-        if (!is_home() && !is_archive()) {
-            echo ' &raquo; ' . ucwords(strtolower(get_the_title()));
         }
 
         echo '</nav>';

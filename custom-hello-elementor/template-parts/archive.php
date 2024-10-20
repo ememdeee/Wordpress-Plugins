@@ -9,33 +9,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 ?>
-<main id="content" class="site-main">
+<main id="content" class="custom-post">
 
-	<?php if ( apply_filters( 'hello_elementor_page_title', true ) ) : ?>
-		<header class="page-header">
+	<?php if (!is_front_page()) { custom_breadcrumbs(); } ?>
+
+	<header class="page-header">
+		<h1 class="entry-title">Blogs</h1>
+	</header>
+
+	<div class="content-container">
+		<div class="page-content">
 			<?php
-			the_archive_title( '<h1 class="entry-title">', '</h1>' );
-			the_archive_description( '<p class="archive-description">', '</p>' );
-			?>
-		</header>
-	<?php endif; ?>
-
-	<div class="page-content">
-		<?php
-		while ( have_posts() ) {
-			the_post();
-			$post_link = get_permalink();
-			?>
-			<article class="post">
-				<?php
-				printf( '<h2 class="%s"><a href="%s">%s</a></h2>', 'entry-title', esc_url( $post_link ), wp_kses_post( get_the_title() ) );
-				if ( has_post_thumbnail() ) {
-					printf( '<a href="%s">%s</a>', esc_url( $post_link ), get_the_post_thumbnail( $post, 'large' ) );
-				}
-				the_excerpt();
+			while ( have_posts() ) {
+				the_post();
+				$post_link = get_permalink();
 				?>
-			</article>
-		<?php } ?>
+				<article class="post">
+					<?php
+					printf( '<h2 class="%s"><a href="%s">%s</a></h2>', 'entry-title', esc_url( $post_link ), wp_kses_post( get_the_title() ) );
+					if ( has_post_thumbnail() ) {
+						printf( '<a href="%s">%s</a>', esc_url( $post_link ), get_the_post_thumbnail( $post, 'large' ) );
+					}
+					the_excerpt();
+					?>
+				</article>
+			<?php } ?>
+		</div>
+        <div class="side-bar"><?php echo do_shortcode('[vin_form]'); ?></div>
 	</div>
 
 	<?php wp_link_pages(); ?>

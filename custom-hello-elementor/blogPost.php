@@ -16,13 +16,12 @@ while ( have_posts() ) :
 	?>
 
 <!-- <main id="content" <?php post_class( 'site-main' ); ?>> -->
-<main id="content" class="single-post">
-
-	<?php if ( apply_filters( 'hello_elementor_page_title', true ) ) : ?>
-		<header class="page-header">
-			<?php the_title( '<h1 class="entry-title_ignore">', '</h1>' ); ?>
-		</header>
-	<?php endif; ?>
+<main id="content" class="custom-post">
+	<?php if (!is_front_page()) { custom_breadcrumbs(); } ?>
+        
+    <header class="page-header">
+        <?php the_title( '<h1 class="entry-title_ignore">', '</h1>' ); ?>
+    </header>
 
     <div class="content-container">
         <div class="page-content">

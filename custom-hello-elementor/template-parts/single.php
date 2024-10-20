@@ -14,6 +14,9 @@ while ( have_posts() ) :
 	?>
 
 <main id="content" <?php post_class( 'site-main' ); ?>>
+	
+	<?php if (!is_front_page()) { custom_breadcrumbs(); } ?>
+	
 
 	<?php if ( apply_filters( 'hello_elementor_page_title', true ) ) : ?>
 		<header class="page-header">

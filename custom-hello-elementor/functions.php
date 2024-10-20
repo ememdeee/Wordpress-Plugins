@@ -346,3 +346,61 @@ function prevent_role_change($all_roles) {
     return $all_roles;
 }
 add_filter('editable_roles', 'prevent_role_change');
+
+
+// custom breadcrumbs
+function custom_breadcrumbs() {
+    global $post;
+
+    // Do not display breadcrumbs on the homepage
+    if (!is_front_page()) {
+        echo '<div class="breadcrumb-container">'; // Add a wrapper div
+        echo '<nav class="breadcrumb">';
+        echo '<a href="' . home_url() . '">Home</a>'; // Home link
+        
+        // Check if it's the main blog page
+        if (is_home()) {
+            echo ' &raquo; Blogs'; // Display "Blog" for the main posts page
+        } 
+        // Check if it's an archive page
+        elseif (is_archive()) {
+            echo ' &raquo; Archive'; // Display "Archive"
+            
+            // If you want to show the title of the specific archive
+            if (is_category()) {
+                echo ' &raquo; ' . ucwords(strtolower(single_cat_title('', false)));
+            } elseif (is_tag()) {
+                echo ' &raquo; ' . ucwords(strtolower(single_tag_title('', false)));
+            } elseif (is_author()) {
+                echo ' &raquo; ' . ucwords(strtolower(get_the_author()));
+            } elseif (is_date()) {
+                echo ' &raquo; ' . ucwords(strtolower(get_the_date('F Y')));
+            }
+        }
+
+        // Check if the current page is a child page
+        if (is_page() && $post->post_parent) {
+            $parent_id  = $post->post_parent;
+            $breadcrumbs = array();
+
+            while ($parent_id) {
+                $page = get_page($parent_id);
+                // Capitalize only the first letter of each word for the parent page titles
+                $breadcrumbs[] = '<a href="' . get_permalink($page->ID) . '">' . ucwords(strtolower(get_the_title($page->ID))) . '</a>';
+                $parent_id  = $page->post_parent;
+            }
+
+            foreach ($breadcrumbs as $crumb) {
+                echo ' &raquo; ' . $crumb;
+            }
+        }
+
+        // Display the current page title only if not on blog archive
+        if (!is_home() && !is_archive()) {
+            echo ' &raquo; ' . ucwords(strtolower(get_the_title()));
+        }
+
+        echo '</nav>';
+        echo '</div>'; // Close the wrapper div
+    }
+}

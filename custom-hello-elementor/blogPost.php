@@ -17,6 +17,7 @@ while ( have_posts() ) :
 
 <!-- <main id="content" <?php post_class( 'site-main' ); ?>> -->
 <main id="content" class="custom-post">
+    
 	<?php if (!is_front_page()) { custom_breadcrumbs(); } ?>
         
     <header class="page-header">

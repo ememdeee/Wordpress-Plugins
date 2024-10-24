@@ -353,24 +353,22 @@ function custom_breadcrumbs() {
 
     // Do not display breadcrumbs on the homepage
     if (!is_front_page()) {
-        echo '<div class="breadcrumb-container">'; // Add a wrapper div
+        echo '<div class="breadcrumb-container">';
         echo '<nav class="breadcrumb">';
-        echo '<a href="' . home_url() . '">Home</a>'; // Home link
-        
-        // Check if it's the main blog page
+        echo '<a href="' . home_url() . '">Home</a>';
+
+        // Handle Blog
         if (is_home()) {
-            echo ' &raquo; Blog'; // Display "Blog" for the main posts page
+            echo ' &raquo; Blog';
         } 
-        // Check if it's a single post page
+        // Handle Blog Single Post
         elseif (is_single()) {
-            echo ' &raquo; <a href="' . home_url('/blog/') . '">Blog</a>'; // Link to the blog page
-            echo ' &raquo; ' . ucwords(strtolower(get_the_title())); // Display current post title
+            echo ' &raquo; <a href="' . home_url('/blog/') . '">Blog</a>';
+            echo ' &raquo; ' . ucwords(strtolower(get_the_title()));
         } 
-        // Check if it's an archive page
+        // Handle Archives (Category, Tag, Author, Date)
         elseif (is_archive()) {
-            echo ' &raquo; Archive'; // Display "Archive"
-            
-            // If you want to show the title of the specific archive
+            echo ' &raquo; Archive';
             if (is_category()) {
                 echo ' &raquo; ' . ucwords(strtolower(single_cat_title('', false)));
             } elseif (is_tag()) {
@@ -381,25 +379,27 @@ function custom_breadcrumbs() {
                 echo ' &raquo; ' . ucwords(strtolower(get_the_date('F Y')));
             }
         }
-
-        // Check if the current page is a child page
-        if (is_page() && $post->post_parent) {
-            $parent_id  = $post->post_parent;
-            $breadcrumbs = array();
-
-            while ($parent_id) {
-                $page = get_page($parent_id);
-                // Capitalize only the first letter of each word for the parent page titles
-                $breadcrumbs[] = '<a href="' . get_permalink($page->ID) . '">' . ucwords(strtolower(get_the_title($page->ID))) . '</a>';
-                $parent_id  = $page->post_parent;
+        // Handle VIN Decoder and Other Pages
+        elseif (is_page()) {
+            if ($post->post_parent) {
+                // Display parent pages hierarchy
+                $parent_id  = $post->post_parent;
+                $breadcrumbs = array();
+                while ($parent_id) {
+                    $page = get_page($parent_id);
+                    $breadcrumbs[] = '<a href="' . get_permalink($page->ID) . '">' . ucwords(strtolower(get_the_title($page->ID))) . '</a>';
+                    $parent_id  = $page->post_parent;
+                }
+                $breadcrumbs = array_reverse($breadcrumbs);
+                foreach ($breadcrumbs as $crumb) {
+                    echo ' &raquo; ' . $crumb;
+                }
             }
-
-            foreach ($breadcrumbs as $crumb) {
-                echo ' &raquo; ' . $crumb;
-            }
+            // Display current page
+            echo ' &raquo; ' . ucwords(strtolower(get_the_title()));
         }
 
         echo '</nav>';
-        echo '</div>'; // Close the wrapper div
+        echo '</div>';
     }
 }

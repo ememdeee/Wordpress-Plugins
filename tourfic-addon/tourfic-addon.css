@@ -1,0 +1,260 @@
+.tf-template-container, .tf-container{
+    max-width: 1240px;
+}
+.tf-apartment-full{
+    width: 100%;
+}
+.tourfic-addon-apartment #tf-apartment-booking{
+    background: white;
+    margin-bottom: 0 !important;
+}
+.flatpickr-months .flatpickr-month .flatpickr-current-month{
+    display: flex;
+}
+.tourfic-addon-apartment .tf-apartment-form-header{
+    display: none !important;
+}
+.tourfic-addon-apartment .inputFieldTourfic{
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    background: white;
+}
+.tourfic-addon-tour .tourfic-addon-tour-form .tf-field-group{
+    margin: 0 0 10px 0;
+}
+button#bookingFormSubmit{
+    width: 100%;
+}
+#bookingForm .elementor-field-group:not(:last-of-type), .inputFieldContainer{
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    background: white;
+    padding: 8px 16px;
+    margin-bottom: 10px;
+}
+#bookingForm .elementor-field-group:not(:last-of-type) input, .inputFieldContainer input{
+    padding: 0;
+    min-height: inherit;
+    font-size: 16px;
+    margin-top: 5px;
+    box-shadow: none;
+    border: none;
+    outline: none;
+}
+#bookingForm .elementor-field-group:not(:last-of-type) label, .inputFieldContainer label{
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+}
+#bookingForm .elementor-field-group:not(:last-of-type) textarea, .inputFieldContainer textarea{
+    padding: 0;
+    font-size: 16px;
+    margin-top: 5px;
+    box-shadow: none;
+    border: none;
+    outline: none;
+}
+#bookingForm .elementor-message{
+    display: none !important;
+}
+.tourfic-addon-apartment .tf-apartment-guest-row, #textAreaClone_container{
+    margin-top: 10px;
+}
+.tourfic-addon-apartment .tf-apartment-form-fields{
+    background: inherit !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+.tourfic-addon-apartment .tf-title-left p{
+    margin: 0;
+}
+#tf-apartment-booking h5,
+#tf-apartment-booking .elementor-field-group-bookingVilla,
+#tf-apartment-booking .elementor-field-group-bookingPrice,
+#tf-apartment-booking .elementor-field-group-bookingTotalPrice,
+#tf-apartment-booking .elementor-field-group-bookingInOut,
+#tf-apartment-booking .elementor-field-group-bookingGuest,
+#tf-apartment-booking .elementor-field-group-bookingMessage,
+#tf-apartment-booking .elementor-field-type-submit,
+#tf-apartment-booking .elementor-message,
+.tourfic-addon-tour .tf-booking-form-data,
+.tourfic-addon-tour .elementor-field-group-bookingVilla,
+.tourfic-addon-tour .elementor-field-group-bookingPrice,
+.tourfic-addon-tour .elementor-field-group-bookingTotalPrice,
+.tourfic-addon-tour .elementor-field-group-bookingInOut,
+.tourfic-addon-tour .elementor-field-group-bookingGuest,
+.tourfic-addon-tour .elementor-field-group-bookingMessage,
+.tourfic-addon-tour .elementor-field-type-submit,
+.tourfic-addon-tour .tf-tours-booking-btn,
+.tourfic-addon-tour .tf-form-title,
+.customPricing.tour .pricingData.infant
+{
+    display: none;
+}
+
+/* search form home page */
+.tf-booking-forms-wrapper{
+    width: fit-content;
+}
+.customSearchForm .tf_homepage-booking{
+    display: flex !important;
+    flex-direction: column !important;
+    background: white;
+    border: none;
+    gap: 24px !important;
+    height: auto;
+    border-radius: 0;
+    margin: 0;
+    box-shadow: none;
+    font-size: 18px;
+    font-weight: 400;
+}
+.customSearchForm .tf_destination-wrap, .customSearchForm  .tf_selectdate-wrap{
+    border: none;
+}
+.customSearchForm .tf_selectperson-wrap{
+    border: none;
+}
+.customSearchForm .tf_destination-wrap, .customSearchForm .tf_selectdate-wrap, .customSearchForm .tf_selectperson-wrap{
+    width: 100% !important;
+}
+.customSearchForm .tf_submitBtn-wrap{
+    text-align: center;
+}
+.customSearchForm .tf_selectdate-wrap .tf_form-inner, .customSearchForm .tf_selectperson-wrap .tf_form-inner, .customSearchForm .tf_destination-wrap .tf_form-inner{
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 12px;
+}
+.customSearchForm #tf-apartment-location::placeholder, .customSearchForm .form-control::placeholder{
+    color: #0B132B;
+}
+.customSearchForm .title{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0 !important;
+    font-family: "Clash Display", Sans-serif;
+    font-weight: 500;
+}
+.customSearchForm .tf_selectdate-wrap .tf_form-inner .form-control, .customSearchForm .tf_destination-wrap #tf-apartment-location{
+    height: inherit;
+    padding: 0;
+}
+.customSearchForm .tf_form-inner .autocomplete-items{
+    border-radius: 8px;
+    background: #ffffff;
+    margin-top: 10px;
+    overflow: hidden;
+}
+.customSearchForm .tf_form-inner .autocomplete-items div{
+    background-color: transparent;
+}
+.tourfic-addon-tour-form .tf-field-group .tf-field{
+    background-color: white !important;
+    border: 1px solid #D9D9D9 !important;
+    border-radius: 8px !important;
+    background: white;
+}
+.customSearchForm .tf_homepage-booking > div, .customSearchForm .tf_destination-wrap .tf_input-inner {
+    padding: 0 !important;
+}
+.customSearchForm .custom-select select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.customSearchForm .tf_selectdate-wrap .form-control:nth-of-type(3){
+    display: none;
+}
+@media screen and (max-width: 1024px) {
+    .customSearchForm .tf_selectperson-wrap{
+        border: none;
+    }
+    .customSearchForm .tf_destination-wrap .tf_input-inner{
+        padding: 0;
+    }
+    .customSearchForm .tf_form-inner .autocomplete-items{
+        margin-top: 35px;
+    }
+}
+.errorText_form{
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+    display: none;
+}
+.error_field, .tourfic-addon .tourfic-addon-tour-form .tf-field-group .tf-field.error_field{
+    border-color: red !important;
+}
+.customPricing{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    line-height: 1;
+}
+.customPricing{
+    margin-top: 30px;
+}
+.customPricing .woocommerce-Price-amount.amount{
+    font-size: 36px;
+    font-weight: 500;
+    color: #686e7a;
+}
+.customPricing .discount .amount, .customPricing .discount{
+    color: var(--e-global-color-820749b);
+    font-size: 30px;
+    font-weight: 500;
+    text-decoration: line-through;
+}
+.customPricing .label{
+    color: var(--e-global-color-1e2306d);
+    font-size: 28px;
+    font-weight: 400;
+}
+.customPricing .viewAll{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    text-decoration: none;
+}
+.customPricing .viewAll p{
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    text-decoration: underline;
+    margin: 0;
+}
+@media screen and (max-width: 767px) {
+    .customPricing .discount, .customPricing .label{
+        font-size: 18px;
+    }
+    .customPricing .woocommerce-Price-amount.amount{
+        font-size: 21px;
+    }
+}
+/* bottom bar Tour */
+.tourfic-addon-tour .tf-bottom-booking-bar {
+    display: none;
+}
+
+/* Custom Total Price */
+.customTotalPrice{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.customTotalPrice .row{
+    display: flex;
+    justify-content: space-between;
+}
+.customTotalPrice .total {
+    padding-top: 10px;
+    margin-top: 8px;
+    border-top: 1px solid #f5f5f4;
+}
+.customTotalPrice .totalPrice{
+    color: #363e4a;
+}

@@ -1,0 +1,188 @@
+.p-0{
+    padding: 0;
+}
+.m-0{
+    margin: 0;
+}
+.flex-row-for-banner{
+    gap: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#notification_display .container {
+    max-width: 100% !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+/* #notification_display{
+    position: fixed;
+    z-index: 99;
+    left: 45%;
+    transform: translatex(-40%);
+    width: fit-content;
+    max-width: -webkit-fill-available;
+} */
+#notification_display {
+    position: relative;
+    z-index: 1;
+    /* left: 50%; */
+    /* left: 45%; */
+    /* transform: translatex(-50%); */
+    /* transform: translatex(-40%); */
+    width: 100% !important;
+    max-width: -webkit-fill-available;
+    font-weight: 300;
+    margin-top:auto;
+    background: transparent;
+}
+#notification_display .close {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+    font-size: 38px !important;
+    font-weight: 400 !important;
+    line-height: 0.6 !important;
+    color: #fff !important;
+    text-shadow: 0 1px 0 #fff !important;
+    opacity: .5 !important;
+    cursor: pointer;
+}
+#notification_display #notify_cost{
+    display: block;
+}
+#notification_display .banner-buy-report {
+    padding: 15px 16%;
+    /* margin: 15px auto; */
+    max-width: 100%;
+}
+#notification_display .banner-buy-report-info b{
+    color: #fff;
+    font-size: 18px;
+}
+
+@media (max-width: 768px){
+    .drm-history[role="wrap"]{
+        margin-top: 0px !important;
+    }
+    #notification_display .container {
+        max-width: 100% !important;
+    }
+    #notification_display .flex-row-for-banner{
+        flex-direction: column;
+        gap: 5px;
+    }
+    #notification_display #notify_button{
+        width: 100%;
+    }
+    /* #notification_display{
+        position: fixed;
+        z-index: 99;
+        left: 35%;
+        transform: translatex(-25%);
+        width: fit-content;
+        max-width: -webkit-fill-available;
+    } */
+    #notification_display {
+        position: relative;
+        z-index: 1;
+        /* left: 50%; */
+        /* left: 35%; */
+        /* transform: translatex(-50%); */
+        /* transform: translatex(-25%); */
+        width: 100% !important;
+        /* max-width: -webkit-fill-available; */
+        font-weight: 300;
+    }
+    #notification_display .banner-buy-report-info b{
+        color: #fff;
+        font-size: 16px;
+    }
+    #notification_display .banner-buy-report {
+        padding: 15px 10% !important;
+    }
+    #notification_display .close{
+        right: 10px;
+    }
+}
+@media (min-width: 992px) {
+    #notification_display .container {
+        max-width: 100% !important;
+    }
+}
+@media (max-width: 300px){
+    .drm-history[role="wrap"]{
+        margin-top: 0px !important;
+    }
+    #notification_display .container {
+        max-width: 100% !important;
+    }
+    #notification_display{
+        position: fixed;
+        z-index: 1;
+        /* left: 50%; */
+        left: 35%;
+        /* transform: translatex(-50%); */
+        transform: translatex(-28%);
+        width: fit-content;
+        max-width: -webkit-fill-available;
+        margin-top:auto;
+    }
+    #notification_display .banner-buy-report-info b{
+        color: #fff;
+        font-size: 16px;
+    }
+    #notification_display .banner-buy-report {
+        padding: 15px 10% !important;
+    }
+}
+.banner-buy-report-info div {
+    font-size: 14px;
+    color: #fff;
+}
+.banner-buy-report-info div {
+    font-size: 14px;
+    color: #fff;
+}
+.banner-buy-report-line {
+    text-align: center;
+}
+.banner-buy-report-info div {
+    font-size: 14px;
+    color: #fff;
+}
+
+strong#banner-buy-report-text {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.banner-buy-report-info-bot {
+    text-transform: none;
+    font-size: 14px;
+    margin: 0 auto;
+    max-width: 450px;
+    line-height: 16px;
+}
+.banner-buy-report-link {
+    font-size: 10px;
+    color:  #fff !important;
+}
+.banner-buy-report-link {
+    margin-top: 2%;
+    padding: 5px 12px 5px 12px;
+    text-transform: uppercase;
+    line-height: 14px;
+    display: block;
+    border-radius: 3px;
+    text-decoration: none;
+}
+.banner-buy-report-arr-r {
+    float: right;
+    margin-top: 6%;
+}
+.banner-buy-report-link .ban-cost {
+    font-size: 15px;
+    font-weight: bold;
+}

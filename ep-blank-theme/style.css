@@ -1,0 +1,11 @@
+/*
+Theme Name: EP Blank Theme
+Author: Muhammad Basurah
+Description: A minimal blank WordPress theme
+Version: 1.0.3
+*/
+
+#header{
+    z-index: 10;
+    position: relative;
+}

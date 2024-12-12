@@ -73,16 +73,47 @@ function syncValues(input, className) {
         };
     });
 }
+// Function to export the current URL safely for use in query parameters
+function exportCurrentURL() {
+    // Get the current URL
+    const currentURL = window.location.href;
+
+    // Extract the domain and path
+    const url = new URL(currentURL);
+    const domain = url.hostname;
+    let path = url.pathname;
+
+    // Remove trailing slash if present
+    if (path.endsWith('/')) {
+        path = path.slice(0, -1);
+    }
+
+    // Map domain to abbreviations
+    const domainMap = {
+        'autovinlookup.com': 'avl',
+        'toyotavindecoder.com': 'tv',
+        'www.chassisvin.com': 'cv'
+    };
+
+    // Get abbreviation or fallback to the full domain
+    const abbreviation = domainMap[domain] || domain.replace(/[.:]/g, '_');
+
+    // Handle home page case
+    const readablePath = path === '' ? '_homePage' : path.replace(/[/:?&=]/g, '_');
+
+    // Construct the final output
+    return `${abbreviation}${readablePath}`;
+}
 
 function redirect(vin, type){
     if (type=="vhr" || type=="vhr_plate"){
         setTimeout(function () {
-            window.location.href = 'https://www.clearvin.com/en/payment/prepare/' + vin + '/?a_aid=b3a49a62';
+            window.location.href = 'https://www.clearvin.com/en/payment/prepare/' + vin + '/?a_aid=b3a49a62' + '&variation=' + exportCurrentURL() + '&data2=' + exportCurrentURL() + '_2';
         }, 1000); // You can adjust the delay time (in milliseconds) as needed
     }
     else if (type=="ws" || type=="ws_plate"){
         setTimeout(function () {
-            window.location.href = 'https://www.clearvin.com/en/window-sticker/checkout/' + vin + '/?a_aid=b3a49a62';
+            window.location.href = 'https://www.clearvin.com/en/window-sticker/checkout/' + vin + '/?a_aid=b3a49a62' + '&variation=' + exportCurrentURL() + '&data2=' + exportCurrentURL() + '_2';
         }, 1000); // You can adjust the delay time (in milliseconds) as needed
     }
 }

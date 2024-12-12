@@ -264,19 +264,6 @@ if ( ! function_exists( 'hello_elementor_body_open' ) ) {
 	}
 }
 
-// get page title
-// function add_page_title_to_console() {
-//     // Get the current page title
-//     $page_title = wp_title('', false);
-
-//     // Output inline JavaScript to set the pageTitle variable
-//     echo '<script>';
-//     echo 'var pageTitle = ' . json_encode($make) . ';';
-//     echo '</script>';
-// }
-// // Hook the function to the wp_head action
-// add_action('wp_head', 'add_page_title_to_console');
-
 // disable this theme to updated
 add_filter('site_transient_update_themes', 'remove_theme_updates');
 

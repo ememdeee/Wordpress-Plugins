@@ -84,16 +84,16 @@ button.search_by_toggle_active{
 }
 .form-collection{
 	background-color: #157796!important;
-  border-color: #157796!important;
+  	border-color: #157796!important;
 	color: #fff !important;
 	padding: 10px 30px !important;
 	width: 100%!important;
-  border-radius: 5px!important;
+  	border-radius: 5px!important;
 	font-weight: 400 !important;
 	text-align: center !important;
-  vertical-align: middle !important;
+  	vertical-align: middle !important;
 	font-size: 1rem !important;
-  line-height: 1.5 !important;
+  	line-height: 1.5 !important;
 	transition: color 0.15s ease-in-out,background-color 0.15s ease-in-out,border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out !important; 
 }
 .errorText_form{

@@ -74,7 +74,7 @@ function syncValues(input, className) {
     });
 }
 // Function to export the current URL safely for use in query parameters
-function exportCurrentURL() {
+function exportCurrentURLAndChannel() {
     // Get the current URL
     const currentURL = window.location.href;
 
@@ -83,10 +83,8 @@ function exportCurrentURL() {
     const domain = url.hostname;
     let path = url.pathname;
 
-    // Remove trailing slash if present
-    if (path.endsWith('/')) {
-        path = path.slice(0, -1);
-    }
+    // Remove the leading and trailing slashes, if present
+    path = path.replace(/^\/|\/$/g, '');
 
     // Map domain to abbreviations
     const domainMap = {
@@ -95,25 +93,27 @@ function exportCurrentURL() {
         'www.chassisvin.com': 'cv'
     };
 
-    // Get abbreviation or fallback to the full domain
-    const abbreviation = domainMap[domain] || domain.replace(/[.:]/g, '_');
+    // Get channel or fallback to the full domain
+    const channel = domainMap[domain] || domain.replace(/[.:]/g, '_');
 
-    // Handle home page case
-    const readablePath = path === '' ? '_homePage' : path.replace(/[/:?&=]/g, '_');
+    // Replace invalid characters in the path
+    const currentPath = path === '' ? 'homePage' : path.replace(/[/:?&=]/g, '_');
 
-    // Construct the final output
-    return `${abbreviation}${readablePath}`;
+    // Return as an array
+    return [channel, currentPath];
 }
 
 function redirect(vin, type){
+    const currentURLAndChannel = exportCurrentURLAndChannel();
+
     if (type=="vhr" || type=="vhr_plate"){
         setTimeout(function () {
-            window.location.href = 'https://www.clearvin.com/en/payment/prepare/' + vin + '/?a_aid=b3a49a62' + '&variation=' + exportCurrentURL() + '&data2=' + exportCurrentURL() + '_2';
+            window.location.href = 'https://www.clearvin.com/en/payment/prepare/' + vin + '/?a_aid=b3a49a62' + '&chan=' + currentURLAndChannel[0] + '&variation=' + currentURLAndChannel[1] + '&data2=' + currentURLAndChannel[1] + '_2';
         }, 1000); // You can adjust the delay time (in milliseconds) as needed
     }
     else if (type=="ws" || type=="ws_plate"){
         setTimeout(function () {
-            window.location.href = 'https://www.clearvin.com/en/window-sticker/checkout/' + vin + '/?a_aid=b3a49a62' + '&variation=' + exportCurrentURL() + '&data2=' + exportCurrentURL() + '_2';
+            window.location.href = 'https://www.clearvin.com/en/window-sticker/checkout/' + vin + '/?a_aid=b3a49a62' + '&chan=' + currentURLAndChannel[0] + '&variation=' + currentURLAndChannel[1] + '&data2=' + currentURLAndChannel[1] + '_2';
         }, 1000); // You can adjust the delay time (in milliseconds) as needed
     }
 }

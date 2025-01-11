@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: YPF Wordpress
- * Plugin URI: https://github.com/ememdeee
+ * Plugin URI: https://github.com/ememdeee/Wordpress-Plugins/tree/main/ypf-wordpress
  * Description: JavaScript and CSS support for YPF Wordpress functionality, including WooCommerce API integration.
  * Version: 1.2.0
  * Author: Muhammad Basurah

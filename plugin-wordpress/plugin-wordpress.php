@@ -25,7 +25,7 @@ add_action('plugins_loaded', 'plugin_load_textdomain');
 function plugin_enqueue_scripts() {
     wp_enqueue_script(
         'plugin-wordpress-script',
-        PLUGIN_PLUGIN_URL . 'plugin-wordpress.js',
+        PLUGIN_PLUGIN_URL . 'assets/js/plugin-wordpress.js',
         array('jquery'),
         PLUGIN_VERSION,
         true
@@ -37,7 +37,7 @@ add_action('wp_enqueue_scripts', 'plugin_enqueue_scripts');
 function plugin_enqueue_styles() {
     wp_enqueue_style(
         'plugin-wordpress-style',
-        PLUGIN_PLUGIN_URL . 'plugin-wordpress.css',
+        PLUGIN_PLUGIN_URL . 'assets/css/plugin-wordpress.css',
         array(),
         PLUGIN_VERSION
     );
